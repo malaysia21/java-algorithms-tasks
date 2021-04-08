@@ -3,14 +3,14 @@ package bitmanipulation;
 public class MaxSubArrayXOR {
 
     public static void main(String[] args) {
-        int arr[] = {8, 1, 2, 12, 7, 6};
-        int arr2[] = {4, 6};
-      //  System.out.println("Max subArray XOR: " + findMaxSubArrayXORSolution1(arr));
-      //  System.out.println("Max subArray XOR: " + findMaxSubArrayXORSolution1(arr2));
+        int[] arr = {8, 1, 2, 12, 7, 6};
+        int[] arr2 = {4, 6};
+        System.out.println("Max subArray XOR: " + findMaxSubArrayXORSolution1(arr));
+        System.out.println("Max subArray XOR: " + findMaxSubArrayXORSolution1(arr2));
         System.out.println("Max subArray XOR: " + maxSubArrayXORSolution2(arr2));
     }
 
-    public static int findMaxSubArrayXORSolution1(int arr[])
+    public static int findMaxSubArrayXORSolution1(int[] arr)
     {
         int result = Integer.MIN_VALUE;
         int n = arr.length;
@@ -31,6 +31,25 @@ public class MaxSubArrayXOR {
     static TrieNode root;
     static final int INT_SIZE = 32;
 
+    static int maxSubArrayXORSolution2(int[] arr)
+    {
+        root = new TrieNode();
+        insert(0);
+
+        int result = Integer.MIN_VALUE;
+        int pre_xor =0;
+
+        for (int j : arr) {
+            pre_xor = pre_xor ^ j;
+            insert(pre_xor);
+            result = Math.max(result, query(pre_xor));
+
+        }
+        return result;
+    }
+
+
+
     static class TrieNode
     {
         int value;
@@ -46,28 +65,19 @@ public class MaxSubArrayXOR {
     {
         TrieNode temp = root;
 
-        // Start from the msb, insert all bits of
-        // pre_xor into Trie
         for (int i=INT_SIZE-1; i>=0; i--)
         {
-            // Find current bit in given prefix
             int val = (pre_xor & (1<<i)) >=1 ? 1 : 0;
 
-            // Create a new node if needed
             if (temp.arr[val] == null)
                 temp.arr[val] = new TrieNode();
 
             temp = temp.arr[val];
         }
 
-        // Store value at leaf node
         temp.value = pre_xor;
     }
 
-    // Finds the maximum XOR ending with last number in
-    // prefix XOR 'pre_xor' and returns the XOR of this
-    // maximum with pre_xor which is maximum XOR ending
-    // with last element of pre_xor.
     static int query(int pre_xor)
     {
         TrieNode temp = root;
@@ -90,32 +100,6 @@ public class MaxSubArrayXOR {
     }
 
 
-    static int maxSubArrayXORSolution2(int arr[])
-    {
-        int n = arr.length;
-        // Create a Trie and insert 0 into it
-        root = new TrieNode();
-        insert(0);
-
-        // Initialize answer and xor of current prefix
-        int result = Integer.MIN_VALUE;
-        int pre_xor =0;
-
-        // Traverse all input array element
-        for (int i=0; i<n; i++)
-        {
-            // update current prefix xor and insert it
-            // into Trie
-            pre_xor = pre_xor^arr[i];
-            insert(pre_xor);
-
-            // Query for current prefix xor in Trie and
-            // update result if required
-            result = Math.max(result, query(pre_xor));
-
-        }
-        return result;
-    }
 }
 
 
