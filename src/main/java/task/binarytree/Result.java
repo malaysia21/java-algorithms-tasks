@@ -1,4 +1,4 @@
-package binarytree;
+package task.binarytree;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

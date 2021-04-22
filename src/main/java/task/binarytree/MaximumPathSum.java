@@ -1,4 +1,4 @@
-package binarytree;
+package task.binarytree;
 
 public class MaximumPathSum {
 
