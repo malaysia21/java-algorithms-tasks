@@ -1,4 +1,4 @@
-package bitmanipulation;
+package task.bitmanipulation;
 
 public class MaxSubArrayXOR {
 

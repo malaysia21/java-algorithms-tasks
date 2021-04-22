@@ -1,4 +1,4 @@
-package binarysearchtree;
+package task.binarysearchtree;
 
 import lombok.Data;
 
