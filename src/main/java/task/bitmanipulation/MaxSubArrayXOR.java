@@ -10,7 +10,7 @@ public class MaxSubArrayXOR {
         System.out.println("Max subArray XOR: " + maxSubArrayXORSolution2(arr2));
     }
 
-    public static int findMaxSubArrayXORSolution1(int[] arr)
+    private static int findMaxSubArrayXORSolution1(int[] arr)
     {
         int result = Integer.MIN_VALUE;
         int n = arr.length;
@@ -50,7 +50,7 @@ public class MaxSubArrayXOR {
 
 
 
-    static class TrieNode
+    private static class TrieNode
     {
         int value;
         TrieNode[] arr =  new TrieNode[2];
@@ -61,7 +61,7 @@ public class MaxSubArrayXOR {
         }
     }
 
-    static void insert(int pre_xor)
+    private static void insert(int pre_xor)
     {
         TrieNode temp = root;
 
@@ -78,7 +78,7 @@ public class MaxSubArrayXOR {
         temp.value = pre_xor;
     }
 
-    static int query(int pre_xor)
+    private static int query(int pre_xor)
     {
         TrieNode temp = root;
         for (int i=INT_SIZE-1; i>=0; i--)
